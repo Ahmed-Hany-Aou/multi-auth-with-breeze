@@ -8,17 +8,20 @@ use Illuminate\Support\Facades\Route;
 
 /* ------------- Admin Route -------------- */
 
-Route::prefix('admin')->group(function (){
+// ------------- Admin Routes --------------
+Route::prefix('admin')->group(function () {
 
-    Route::get('/login',[AdminController::class, 'Index'])->name('login_from');
+    Route::get('/login', [AdminController::class, 'Index'])->name('login_from');
+    Route::post('/login/owner', [AdminController::class, 'Login'])->name('admin.login');
+    Route::get('/register', [AdminController::class, 'AdminRegister'])->name('admin.register');
     
-    Route::post('/login/owner',[AdminController::class, 'Login'])->name('admin.login');
-    
-    Route::get('/dashboard',[AdminController::class, 'Dashboard'])->name('admin.dashboard');//->middleware('admin');
-    Route::get('/logout',[AdminController::class, 'AdminLogout'])->name('admin.logout')->middleware('admin');
-    Route::get('/register',[AdminController::class, 'AdminRegister'])->name('admin.register');
+ //   Route::middleware(['admin'])->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'Dashboard'])->name('admin.dashboard');
+        Route::get('/logout', [AdminController::class, 'AdminLogout'])->name('admin.logout');
+    });
 
-});
+
+
 
 
 Route::get('/', function () {
