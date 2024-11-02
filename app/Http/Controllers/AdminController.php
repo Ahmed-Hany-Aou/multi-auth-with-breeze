@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use Auth;
+
 use Illuminate\Http\Request;
+use Auth;
+use App\Models\Admin;
+use Illuminate\Support\Facades\Hash;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -31,4 +35,30 @@ class AdminController extends Controller
         return redirect()->route('login_from')->with('error','Admin Logout Successfully');
 
     } // end mehtod 
+    public function AdminRegister(){
+
+        return view('admin.admin_register');
+
+    } // end mehtod 
+
+
+
+    public function AdminRegisterCreate(Request $request){
+
+        // dd($request->all());
+
+        Admin::insert([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+            'created_at' => Carbon::now(),
+
+        ]);
+
+         return redirect()->route('login_from')->with('error','Admin Created Successfully');
+
+    } // end mehtod 
+
 }
+
+
