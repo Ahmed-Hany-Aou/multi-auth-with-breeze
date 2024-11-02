@@ -24,5 +24,11 @@ class AdminController extends Controller
             return back()->with('error','Invaild Email Or Password');
         }
 
+    } 
+    public function AdminLogout(){
+
+        Auth::guard('admin')->logout();
+        return redirect()->route('login_from')->with('error','Admin Logout Successfully');
+
     } // end mehtod 
 }
