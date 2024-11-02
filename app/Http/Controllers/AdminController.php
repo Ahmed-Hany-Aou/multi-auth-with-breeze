@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Auth;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -13,4 +13,16 @@ class AdminController extends Controller
     public function Dashboard(){
         return view('admin.index');
     }
+
+    public function Login(Request $request){
+        // dd($request->all());
+
+        $check = $request->all();
+        if(Auth::guard('admin')->attempt(['email' => $check['email'], 'password' => $check['password']  ])){
+            return redirect()->route('admin.dashboard')->with('error','Admin Login Successfully');
+        }else{
+            return back()->with('error','Invaild Email Or Password');
+        }
+
+    } // end mehtod 
 }
