@@ -1,8 +1,8 @@
-<?php
-
+?<?php
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
+use App\Http\Middleware\Admin;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -11,7 +11,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Register route middleware aliases here
+        $middleware->alias([
+            'admin' => Admin::class, // Add 'admin' as an alias for Admin middleware
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
