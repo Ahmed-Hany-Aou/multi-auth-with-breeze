@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Admin;
+use App\Models\Seller;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -15,6 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-       \App\Models\Admin::factory(2)->create();
+        \App\Models\Seller::factory(2)->create();
     }
 }
