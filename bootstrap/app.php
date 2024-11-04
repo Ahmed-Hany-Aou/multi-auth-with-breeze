@@ -1,4 +1,5 @@
-?<?php
+<?php
+use App\Http\Middleware\Seller;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -14,6 +15,7 @@ return Application::configure(basePath: dirname(__DIR__))
         // Register route middleware aliases here
         $middleware->alias([
             'admin' => Admin::class, // Add 'admin' as an alias for Admin middleware
+            'seller' => Seller::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
