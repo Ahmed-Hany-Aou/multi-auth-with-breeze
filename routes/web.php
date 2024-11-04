@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\SellerController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -24,12 +26,41 @@ Route::prefix('admin')->group(function (){
     
     Route::post('/register/create',[AdminController::class, 'AdminRegisterCreate'])->name('admin.register.create');
     
-    Route::middleware(['admin'])->get('/admin/test', function () {
-        return "Admin middleware is working!";
-    });
+    /*Route::middleware(['admin'])->get('/admin/test', function () {
+       return "Admin middleware is working!";
+    }); */
     
     
     });
+
+
+    /* ------------- Seller Route -------------- */
+
+Route::prefix('seller')->group(function (){
+
+    Route::get('/login',[SellerController::class, 'SellerIndex'])->name('seller_login_from');
+    
+    Route::get('/dashboard',[SellerController::class, 'SellerDashboard'])->name('seller.dashboard')->middleware('seller');
+    
+    Route::post('/login/owner',[SellerController::class, 'SellerLogin'])->name('seller.login');
+    
+    
+    
+    Route::get('/logout',[SellerController::class, 'SellerLogout'])->name('seller.logout')->middleware('seller');
+    
+    Route::get('/register',[SellerController::class, 'SellerRegister'])->name('seller.register');
+    
+    Route::post('/register/create',[SellerController::class, 'SellerRegisterCreate'])->name('seller.register.create');
+    
+
+  Route::middleware(['seller'])->get('/seller/test', function () {
+       return "seller middleware is working!";
+    }); 
+
+
+    
+    }); 
+    /* ------------- End Seller Route -------------- */
 
 
 Route::get('/', function () {
